@@ -1,3 +1,5 @@
+from sqlalchemy.orm import Session
+from app.models.company import Company
 import requests
 
 
@@ -40,3 +42,11 @@ def get_recent_filings(cik: str):
         })
 
     return filings
+
+
+def get_company_by_ticker(db: Session, ticker: str):
+    return (
+        db.query(Company)
+        .filter(Company.ticker == ticker.upper())
+        .first()
+    )
