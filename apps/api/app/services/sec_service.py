@@ -23,3 +23,20 @@ def get_company_submissions(cik: str):
     response.raise_for_status()
 
     return response.json()
+
+
+def get_recent_filings(cik: str):
+    data = get_company_submissions(cik)
+
+    recent = data["filings"]["recent"]
+
+    filings = []
+
+    for i in range(len(recent["form"])):
+        filings.append({
+            "form_type": recent["form"][i],
+            "filing_date": recent["filingDate"][i],
+            "accession_number": recent["accessionNumber"][i]
+        })
+
+    return filings
