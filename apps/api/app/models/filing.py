@@ -23,4 +23,7 @@ class Filing(Base):
 
     filing_url = Column(String(500))
 
-    company = relationship("Company")
+    company = relationship(
+        "Company",
+        back_populates="filings"
+    )

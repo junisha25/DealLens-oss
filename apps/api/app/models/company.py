@@ -1,4 +1,10 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+from app.db.database import Base
+
+
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.db.database import Base
 
@@ -17,3 +23,8 @@ class Company(Base):
     sector = Column(String(255))
 
     industry = Column(String(255))
+
+    filings = relationship(
+        "Filing",
+        back_populates="company"
+    )
